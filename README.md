@@ -1,4 +1,5 @@
-# 5g-ran
+# 5G-RAN
+
 Dockerfile for building an image for OpenAirInterface5G RAN for the gNB
 
 The Dockerfile installs the gNB for 5G RAN from OpenAirInterface into a Docker container. The regular builds are pushed into the Docker repository ```brunodzogovic/5g_gnb```. This Dockerfile builds the RAN in monolithic version and the IP addressing of the AMF/NRF should be adjusted accordingly into the configuration files manually (in the future, it will be implemented to be configurable before building the gNB). 
