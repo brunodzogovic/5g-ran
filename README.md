@@ -8,10 +8,10 @@ Note that the latest Git pulls will also invoke new UHD libraries and images for
 
 To build the containers, simply run ```docker build -t [your_docker_repository]/5g_gnb .``` it will invoke the Dockerfile and necessary side scripts.
 
-To run the containers, one can do the following: 
+To run the containers, one can do the following (note that mapping the volume of /dev/bus/usb is necessary only for the SDRs running through USB): 
 
 ```
-docker run -itd --privileged --net=[your_network] --hostname=5g_enb --restart=unless-stopped --name=5g_enb -v /dev/bus/usb:/dev/bus/usb -v /lib/modules:/lib/modules -v /etc/network:/etc/network:rw --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" [your_docker_repository]/5g_enb
+docker run -itd --privileged --net=[your_network] --hostname=5g_gnb --restart=unless-stopped --name=5g_gnb -v /dev/bus/usb:/dev/bus/usb -v /lib/modules:/lib/modules -v /etc/network:/etc/network:rw --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" [your_docker_repository]/5g_enb
 ```
 
 The environmental variable DISPLAY serves for the purpose of enabling X11 sessions coming from the container. This is necessary for the gNB x-forms to be represented on screen, providing information on the FFT, channel coding and the general signal connection details. 
