@@ -3,7 +3,7 @@ LABEL org.opencontainers.image.authors="bruno.dzogovic@gmail.com"
 ENV TZ=Europe/Oslo 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get update && apt upgrade && apt-get install -y \
+RUN apt-get update && apt-get upgrade && apt-get install -y \
 	apt-transport-https \	
 	curl \
 	git \
