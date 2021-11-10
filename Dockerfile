@@ -13,7 +13,8 @@ RUN apt-get update && apt-get upgrade && apt-get install -y \
 	iputils-ping \ 
 	unzip \
 	&& git clone https://gitlab.eurecom.fr/oai/openairinterface5g.git
-
+ENV BUILD_UHD_FROM_SOURCE=True
+ENV UHD_VERSION=4.1.0.0
 COPY env.sh /openairinterface5g/env.sh 
 RUN ./openairinterface5g/env.sh  
 
