@@ -7,7 +7,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && apt-get upgrade && apt-get install -y \
         apt-transport-https \
         apt-utils \
-        curl \
+        dialog \
+	curl \
         git \
         subversion \
         vim \
@@ -18,5 +19,5 @@ RUN apt-get update && apt-get upgrade && apt-get install -y \
 
 COPY env.sh /openairinterface5g/env.sh 
 WORKDIR /openairinterface5g
-CMD . env.sh  
+RUN ./env.sh  
 

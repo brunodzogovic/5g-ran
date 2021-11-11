@@ -8,10 +8,10 @@ cd /openairinterface5g/cmake_targets/
 ./build_oai -i -I -w USRP -x --gNB
 wait
 file="/openairinterface5g/targets/ARCH/USRP/USERSPACE/LIB/usrp_lib.cpp"
-red=`tput setaf 1`
-green=`tput setaf 2`
-orange=`tput setaf 3`
-reset=`tput sgr0`
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+orange=$(tput setaf 3)
+reset=$(tput sgr0)
 
 echo "${orange}Enter the model of your USRP (Options: B210, X310, N310, N320 or N321 respectively):${reset}"
 while read -r USRP_MODEL
