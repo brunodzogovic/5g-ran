@@ -1,16 +1,5 @@
 #! /bin/bash 
 
-apt-get update && apt-get upgrade && apt-get install -y \
-        apt-transport-https \
-        curl \
-        git \
-        subversion \
-        vim \
-        net-tools \
-        iputils-ping \
-        unzip \
-        && git clone https://gitlab.eurecom.fr/oai/openairinterface5g.git
-
 cd /openairinterface5g
 source oaienv
 git checkout develop

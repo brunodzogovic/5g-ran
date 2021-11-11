@@ -30,4 +30,4 @@ read IP_ADDRESS
 sleep 1 
 docker build -t $REPO/5g_gnb .
 wait
-docker run -itd --privileged --net $MACVLAN_NET ip $IP_ADDRESS --hostname=5g_gnb --restart=unless-stopped --name=5g_gnb -v /lib/modules:/lib/modules -v /etc/network:/etc/network:rw --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" $REPO/5g_gnb
+docker run -itd --privileged --net $MACVLAN_NET --ip $IP_ADDRESS --hostname=5g_gnb --restart=unless-stopped --name=5g_gnb -v /lib/modules:/lib/modules -v /etc/network:/etc/network:rw --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" $REPO/5g_gnb
