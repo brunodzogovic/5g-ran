@@ -59,7 +59,7 @@ do
           then
             echo "${red} The clock rate is incorrect. Please enter a valid number with the format XXX.XX...${reset}"
           else
-            sed -i "s/122.88e6/$CLOCK_RATE\e6/g" "$file"
+            sed -i 's/^CLOCK_RATE=.*/CLOCK_RATE='"$CLOCK_RATE"'/g' "$file" 
             sleep 1
             echo "${green}The clock frequency of the ${red}$USRP_MODEL ${green}is set to ${red}$CLOCK_RATE${reset}"
             sleep 1
