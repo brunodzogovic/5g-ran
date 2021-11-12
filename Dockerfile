@@ -19,5 +19,5 @@ RUN apt-get update && apt-get upgrade && apt-get install -y \
 
 COPY env.sh /openairinterface5g/env.sh 
 WORKDIR /openairinterface5g
-RUN ./env.sh  
+ENTRYPOINT /bin/bash env.sh  
 
