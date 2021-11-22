@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-CLOCK_RATE=128.88
+CLOCK_RATE=250.00
 cd /openairinterface5g
 source oaienv
 git checkout develop

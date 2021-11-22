@@ -48,8 +48,9 @@ do
       echo "${green}Your USRP model is: ${red}$USRP_MODEL${reset}"
       sleep 1
       echo "${green} Increasing the network kernel socket send/receive buffers to 25000000 to avoid dropped packets to the USRP..."
-      sysctl -w net.core.wmem_max=25000000
-      sysctl -w net.core.rmem_max=25000000 
+      sysctl -w net.core.wmem_max=33554432
+      sysctl -w net.core.rmem_max=33554432
+      ulimit -s 8192 
       sleep 1
       echo "Done!${reset}"
       echo "${orange}Distinct USRP models support different clock frequency rates. For example, N320 cannot work on 200 Mhz whereas N321 cannot work under 200 MHz. Enter the required clock frequency of your device in decimal numbers ${green}(N321 supported clock rates: 200.00, 245.76 or 250.00 MHz). ${orange}Enter the clock rate of your device: ${reset}"
