@@ -1,0 +1,29 @@
+---
+# Source: oai-gnb/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: gnb
+  namespace: c-ran
+  labels:
+    app: gnb
+    app.kubernetes.io/instance: gnb 
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: s1c
+      port: 36412
+      targetPort: 36412
+      protocol: UDP
+    - name: s1u
+      port: 2152
+      targetPort: 2152
+      protocol: UDP
+    - name: x2c
+      port: 36422
+      targetPort: 36422
+      protocol: UDP
+  selector:
+    app: gnb
+    app.kubernetes.io/instance: gnb

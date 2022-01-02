@@ -1,0 +1,145 @@
+---
+# Source: oai-gnb/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gnb
+  namespace: c-ran
+  labels:
+    app: gnb
+    app.kubernetes.io/instance: gnb 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gnb
+      app.kubernetes.io/instance: gnb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: gnb
+        app.kubernetes.io/instance: gnb
+      annotations:
+        k8s.v1.cni.cncf.io/networks: >-
+          [{
+                 "name": "gnb-c-ran-net1",
+                 "default-route": ["192.168.18.129"]
+          }]
+    spec:
+      securityContext:
+        runAsGroup: 0
+        runAsUser: 0
+      containers:
+      - name: gnb
+        image: "brunodzogovic/5g_gnb:latest"
+        securityContext:
+            privileged: true
+        ports:
+        - containerPort: 2152
+          name: s1u
+          protocol: UDP
+        - containerPort: 36412
+          name: s1c
+          protocol: UDP
+        - containerPort: 36422
+          name: x2c
+          protocol: UDP
+        env:
+          - name: TZ
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: timeZone
+          - name: RFSIMULATOR
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: rfSimulator
+          - name: USE_SA_TDD_MONO
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: useSATddMono
+          - name: GNB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: gnbName
+          - name: MCC
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: mcc
+          - name: MNC
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: mnc
+          - name: MNC_LENGTH
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: mncLength
+          - name: TAC
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: tac
+          - name: NSSAI_SST
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: nssaiSst
+          - name: NSSAI_SD0
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: nssaiSd0
+          - name: NSSAI_SD1
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: nssaiSd1
+          - name: AMF_IP_ADDRESS
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: amfIpAddress
+          - name: GNB_NGA_IF_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: gnbNgaIfName
+          - name: GNB_NGA_IP_ADDRESS
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: gnbNgaIpAddress
+          - name: GNB_NGU_IF_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: gnbNguIfName
+          - name: GNB_NGU_IP_ADDRESS
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: gnbNguIpAddress
+          - name: USE_ADDITIONAL_OPTIONS
+            valueFrom:
+              configMapKeyRef:
+                name: gnb-configmap
+                key: useAdditionalOptions
+      - name: tcpdump
+        image: "corfr/tcpdump:latest"
+        command:
+          - /bin/sleep
+          - infinity
+      volumes:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      serviceAccountName: gnb-sa
+      terminationGracePeriodSeconds: 30

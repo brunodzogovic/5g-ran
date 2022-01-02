@@ -1,0 +1,24 @@
+---
+# Source: oai-gnb/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oai-gnb-configmap
+data:
+  amfIpAddress: "192.168.18.177"
+  gnbName: "gnb-n321"
+  gnbNgaIfName: "net1"
+  gnbNgaIpAddress: "192.168.18.178"
+  gnbNguIfName: "net1"
+  gnbNguIpAddress: "192.168.18.178"
+  mcc: "208"
+  mnc: "93"
+  mncLength: "2"
+  nssaiSd0: "1"
+  nssaiSd1: "112233"
+  nssaiSst: "1"
+  rfSimulator: "server"
+  tac: "1"
+  timeZone: "Europe/Paris"
+  useAdditionalOptions: "--sa -E --rfsim"
+  useSATddMono: "yes"
