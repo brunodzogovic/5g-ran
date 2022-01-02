@@ -1,0 +1,7 @@
+resources: 
+  - rbac.yml           
+  - configmap.yml      
+#  - multus.yml        
+  - serviceaccount.yml 
+  - service.yml        
+  - deployment.yml     
